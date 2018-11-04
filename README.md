@@ -13,5 +13,15 @@ documento lista.js - funciones:
     - add: añade un elemento al array.
     - toString: devuelve una cadena con los valores del array separados con "-".
     - testList: funciones de testeo (aún por implementar)
+#version 0.0.2
+modificaciones sobre el documento lista.js - funciones:
+    - funciones añadidas:
+        + get: devuelve el elemento encontrado en el indice selecionado dentro del array.
+        + indexOf: devuelve la primera coincidencia del elemento buscado; si no lo encuentra devuelve -1.
+        + lastIndexOf: devuelve la ultima coincidencia del elemento buscado; si no lo encuentra devuelve -1.
+        + firstElement: devuelve el 1º elemento de un array.
+        + lastElement: devuelve el último elemento de un array.
+        + addAt: Incompleta.
+    - funciones de testeo añadidas.
 
     los archivos y documentos no mencionados aparecen vacios o muy incompletos en esta versión.
