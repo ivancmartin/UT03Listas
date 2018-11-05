@@ -13,6 +13,9 @@ documento lista.js - funciones:
     - add: añade un elemento al array.
     - toString: devuelve una cadena con los valores del array separados con "-".
     - testList: funciones de testeo (aún por implementar)
+
+    los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
+
 #version 0.0.2
 modificaciones sobre el documento lista.js - funciones:
     - funciones añadidas:
@@ -24,4 +27,17 @@ modificaciones sobre el documento lista.js - funciones:
         + addAt: Incompleta.
     - funciones de testeo añadidas.
 
-    los archivos y documentos no mencionados aparecen vacios o muy incompletos en esta versión.
+    los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
+
+#version 0.0.2
+modificaciones sobre el documento lista.js - funciones:
+    - Modificación del orden de las funciones dentro del archivo.
+    - funciones añadidas:
+        + addAt: añade un elemento en la posición indicada si es posible. Completa.
+        + clear: vacia la lista.
+        + set: sustituye el valor de un indice por otro indicado.
+        + remove: elimina el valor del indice seleccionado.
+    - funciones modificadas: 
+        + capacty.
+    los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
+
