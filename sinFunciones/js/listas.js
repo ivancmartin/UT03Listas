@@ -52,11 +52,10 @@ function add(list,elem){
     }else{
         throw "esto está lleno!";
     }
-
     return size(list);
 }
 
-//Incompleto: añade a la lista un elemento de tipo Number y devuelve el tamaño actual del array
+//Añade a la lista un elemento de tipo Number y devuelve el tamaño actual del array
 function addAt(list,elem,index){
     //recogemos el tamaño actual del array
     var tam = capacity(list);
@@ -82,7 +81,7 @@ function addAt(list,elem,index){
             //sustituimos el indice con el nuevo valor
             list[index] = elem;
             //desde el siguiente indice al ya sustituido, movemos los elementos
-            for (var i = (index+1); i < capacity(list); i++) {
+            for (var i = (index + 1); i < capacity(list); i++) { //repasar - size
                 var next = list[i];
                 list[i] = aux;
                 aux = next;
@@ -264,7 +263,6 @@ function removeElement(list,elem){
             }
         }   
     }
-
     return deleted;
 }
 

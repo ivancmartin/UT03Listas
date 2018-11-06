@@ -55,3 +55,27 @@ modificaciones sobre el documento lista.html:
     - instrucciones de uso añadidas.
 
     los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
+
+#version 0.0.5
+modificaciones sobre los documentos listasOrdenadas.html
+    - funciones principales añadidas para su funcionamiento
+modificaciones sobre los documentos listasOrdenadas.js
+    - funciones añadidas:
+        + addElem: función principal.
+        + create: crea el array con un tamaño fijo.
+        + size: devuelve tamaño de nuestro array según se va llenando.
+        + capacity: muestra la capacidad total del array.
+        + isFull: devuelve si esta lleno o no el array.
+        + isEmpty: devuelve si esta vacío o no el array.
+        + add: añade un elemento al array.
+        + toString: devuelve una cadena con los valores del array separados con "-".
+        + testList: funciones de testeo (aún por implementar).
+        + get: devuelve el elemento encontrado en el indice selecionado dentro del array.
+        + indexOf: devuelve la primera coincidencia del elemento buscado; si no lo encuentra devuelve -1.
+        + firstElement: devuelve el 1º elemento de un array.
+        + lastElement: devuelve el último elemento de un array.
+        + removeElement: borra un elemento concreto del array.
+        + rmvElem: función principal.
+    - aun en mal funcionamiento.
+    
+    los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
