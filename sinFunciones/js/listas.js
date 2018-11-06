@@ -59,30 +59,22 @@ function add(list,elem){
 //Incompleto: añade a la lista un elemento de tipo Number y devuelve el tamaño actual del array
 function addAt(list,elem,index){
     //recogemos el tamaño actual del array
-    var tam = size(list);
-    
+    var tam = capacity(list);
     //pasamos a entero
     elem = parseInt(elem);
-
-    console.log("index " + index);
     //si el elemento NO es un número
     if(isNaN(elem)){
-        throw "Eso no es un número sesñ@r";
+        throw "Eso no es un número";
     }
-
     //control sobre el indice: si esta fuera de rango o no es un numero  
-    if(isNaN(index) || (index < 0 || index > capacity(list))){
-        throw "Me parece que eso no es un indice válido (max " + tam + " )...";
+    if(isNaN(index) || (index < 0 || index > tam)){
+        throw "Eso no es un indice válido (max " + tam + " )...";
     }
-
     //si la lista NO está llena
     if(!isFull(list)){
         //si está vacía se añade al principio
         if(isEmpty(list)){
             list[0] = elem;
-        }else if(isNaN(list[index-1])){
-            //si el indice anterior está vacío, se añade en la última posición
-            list[size(list)] = elem;
         }else if(!isNaN(list[index])){
             //si el elemento es un numero y hay espacio para introducirlo
             //guardamos el valor a sustituir
@@ -95,6 +87,9 @@ function addAt(list,elem,index){
                 list[i] = aux;
                 aux = next;
             }     
+        }else{
+            //si el indice anterior está vacío, se añade en la última posición
+            list[size(list)] = elem;
         }
     }else{
         throw "esto está lleno!";
@@ -203,32 +198,78 @@ function lastElement(list){
     return last;
 }
 
-//elimina el indice del array
+//elimina el indice del array y devuelve el valor borrado
 function remove(list,index){
     
     if(isEmpty(list)){    
         throw "La lista está vacía";
     }
 
-    var range = capacity(list);
+    var range = size(list)-1;
+    //console.log(range);
     if(index > range || index < 0){    
-        throw "El indice es incorrecto: debe estar entre el 0 y" + range;
+        throw "El indice es incorrecto: debe estar entre el 0 y " + range;
     }
 
-    console.log("indice" + index);
+    var deleted = list[index];
+    //console.log("indice " + index);
     list[index] = Number.NaN;
-    console.log("el siguiente " + !isNaN(list[index + 1]));
+    //console.log("el siguiente " + (!isNaN(list[index - 1]) || index == 0));
     
-    if(!isNaN(list[index + 1])){
-
-        for (var i = index; i < size(list); i++) {
-            list[index] = list[i + 1]; 
-        }
+    if(!isNaN(list[index - 1]) || index == 0){
+        //sustituimos el indice con el nuevo valor
+        list[index] = Number.NaN;
+        var aux;
+        //desde el siguiente indice al ya sustituido, movemos los elementos
+        for(var i = index; i < range ; i++){
+            if(isNaN(list[i])){
+                //console.log(list[i] + " " + list[i + 1] );
+                list[i] = list[i + 1];
+                list[i + 1] = Number.NaN;
+            }
+        }   
     }
-
+    return deleted;
 }
 
-//sustituye el valor del indice
+//elimina el indice del array
+function removeElement(list,elem){
+    
+    if(isEmpty(list)){    
+        throw "La lista está vacía";
+    }
+
+    var range = size(list);
+    
+    //recogemos el indice 
+    var index = indexOf(list,elem); 
+    
+    if(index == -1){
+        throw "Valor no encontrado";
+    }
+
+    //recogemos el valor que se va a borrar
+    var deleted = list[index];
+
+    if(!isNaN(list[index - 1]) || index === 0){
+        //sustituimos el indice con el nuevo valor
+        list[index] = Number.NaN;
+        var aux;
+        //desde el siguiente indice al ya sustituido, movemos los elementos
+        for(var i = 0; i < range ; i++){
+            if(isNaN(list[i])){
+                //console.log(list[i] + " " + list[i + 1]);
+                list[i] = list[i + 1];
+                list[i + 1] = Number.NaN;
+            }
+        }   
+    }
+
+    return deleted;
+}
+
+
+//sustituye el valor del indice, devuelve el valor sustituido
 function set(list,elem,index){
     var replace;
     if(isEmpty(list)){
@@ -268,28 +309,64 @@ function addElem(elem,index){
     testList();
 }
 
-//funciones de testeo
-function testList(){
-    console.log("Lista de elementos: " + elemntList);
-    console.log("size() - Tamaño actual del array:" + size(elemntList));
-    console.log("capacity() -Total de elementos a introducir:" + capacity(elemntList));
+// función principal: eliminar un elemento
+function rmvElem(elem,index){
+    index = parseInt(index);
+    var error = document.getElementById("error");
+    var info = document.getElementById("info");
+    error.innerHTML = ("");
+    try {
+        // si se introduce un index de tipo Number
+        if(isNaN(index)){
+            removeElement(elemntList,elem);    
+        }else{
+            remove(elemntList,index);
+        }
+    } catch (exception) {
+        error.innerHTML = exception;
+    }
+    info.innerHTML = toString(elemntList); 
     
-    try {
-        console.log("get() - El indice 1 del array es: " + get(elemntList,1));   
-    } catch (error) {
-        console.log(error);
-    }
-
-    try {
-        console.log("set() - Cambia el valor del indice 0 a 8. El valor sustituido ha sido" + set(elemntList,8,3));    
-    } catch (error) {
-        console.log(error);
-    }
-
-    console.log("indexOf() - ¿Existe el num 3 en el array? " + indexOf(elemntList,3));
-    console.log("lastIndexOf() - ¿Existe el num 3 en el array? " + lastIndexOf(elemntList,3));
-    console.log("lastElement() - Elemento en la ultima posición del array es: " + lastElement(elemntList));
-
 }
 
+//funciones de testeo
+function testList(){
+    var list = create (); 	
+ 	var list=[]; 	
+ 	console.log ("Capacidad: " + capacity(list));
+ 	console.log("Es vacía: " + isEmpty(list));
+ 	console.log("Longitud: " + size(list));
+
+ 	try {
+	 	for (var i=0; i<MAX_ELEMENT_LIST; i++){
+	 		console.log("Nº de elementos: " + add(list,i*10));
+	 	}
+	 	add(list,i); //It will generate an exception.
+ 	} catch (err) {
+ 		console.log(err);
+ 	}
+
+ 	console.log ("La lista completa: " + toString(list));	 	
+ 	console.log ("1º elemento: " + firstElement(list));
+ 	console.log ("último elemento: " + lastElement(list));
+	 	
+ 	//clear(list);
+
+ 	try {
+	 	while (true){ 
+	 		console.log ("Elemento borrado del indice 2: " + remove(list,2));
+            console.log ("Estado de la lista actual: " + toString(list)); 
+            console.log ("Eliminamos un valor concreto(si aparece ene el array): 10");  
+            console.log ("Resultado: " + removeElement(list,10));
+            console.log ("Estado de la lista actual: " + toString(list));
+            console.log ("añadimos un valor sustituyendo a otro: valor sustituido: " + set(list,25,0));
+            console.log ("Estado de la lista actual: " + toString(list));             	 	 		 	
+	 	}
+ 	} catch (err) {
+ 		console.log(err); 
+    }
+     
+ 	console.log ("Estado de la lista actual: " + toString(list)); 	 	
+}
+window.onload = (testList);
 

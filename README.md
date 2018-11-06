@@ -29,7 +29,7 @@ modificaciones sobre el documento lista.js - funciones:
 
     los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
 
-#version 0.0.2
+#version 0.0.3
 modificaciones sobre el documento lista.js - funciones:
     - Modificación del orden de las funciones dentro del archivo.
     - funciones añadidas:
@@ -39,5 +39,19 @@ modificaciones sobre el documento lista.js - funciones:
         + remove: elimina el valor del indice seleccionado.
     - funciones modificadas: 
         + capacty.
+
     los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
 
+#version 0.0.4
+modificaciones sobre el documento lista.js - funciones:
+    - corrección del metodo addAt.
+    - corrección del metodo remove.
+    - funciones añadidas:
+        + removeElement: borra un elemento concreto del array.
+        + rmvElem: función principal.
+    - funciones de testeo modificadas.
+modificaciones sobre el documento lista.html:
+    - correciones de funcionalidad de los botones.
+    - instrucciones de uso añadidas.
+
+    los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
