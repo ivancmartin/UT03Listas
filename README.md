@@ -77,5 +77,10 @@ modificaciones sobre los documentos listasOrdenadas.js
         + removeElement: borra un elemento concreto del array.
         + rmvElem: función principal.
     - aun en mal funcionamiento.
-    
-    los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
+
+#version 0.1.0
+modificaciones sobre los documentos listasOrdenadas.js y listas.js
+    - comprobación del estado de las funciones del documento listasOrdenadas.js.
+    - corrección de la función toString(ambos): indica si la lista está vacía.
+    - corrección de la funcion add (listasOrdenadas.js): obtienen el indice con el valor más alto que elemento dado y lo introduce en esa posición moviendo el resto.
+    - corrección de las funciones de testeo de ambos documentos: las funciones son más especificas para cada documento.

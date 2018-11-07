@@ -17,19 +17,19 @@ function create(){
 
 //Comprobar si el array está vacío: devuelve false si NO lo está; true si lo está.
 function isEmpty(list){
-    return ( isNaN(list[0]) ? true : false );
+    return (isNaN(list[0]) ? true : false );
 }
 
 //Comprobar si el array está lleno: devuelve false si NO lo está; true si lo está.
 function isFull(list){
-    return ( size(list) > MAX_ELEMENT_LIST-1 ? true : false );
+    return (size(list) > MAX_ELEMENT_LIST-1 ? true : false );
 }
 
 //Devuelve el tamaño de un array
 function size(list){
     var length = 0;
     //mientras length sea menor que el máximo de elemento y el elemento sea un número entero
-    while(length<MAX_ELEMENT_LIST && !isNaN(list[length]) ){
+    while(length < MAX_ELEMENT_LIST && !isNaN(list[length]) ){
         length++;
     }
     return length;
@@ -47,13 +47,34 @@ function add(list,elem){
     
     //si la lista NO está llena
     if(!isFull(list)){
+        var length = size(list);
         //si está vacía se añade al principio
         if(isEmpty(list)){
             list[0] = elem;
-        }else if( list[size(list)] > elem ){
-            list[list[size(list)] + 1] = elem;
+            //console.log("vacia" + toString(list) );
         }else{
-            console.log("el fallo");
+            //buscamos el indice con un valor mayor superior al dado
+            var mayor = -1;
+            var index = 0;
+            var length = size(list);
+            while(mayor == -1 && index < length ){
+                if(list[index] > elem){
+                    mayor = index;
+                }else{
+                    index++;
+                }
+            }
+            //sustituimos el indice con el nuevo valor
+            //console.log("el mayor" + index);
+            var aux = list[index];
+            
+            list[index] = elem;
+            //desde el siguiente indice al ya sustituido, movemos los elementos
+            for(var i = (index + 1); i < capacity(list); i++) { //repasar - size
+                var next = list[i];
+                list[i] = aux;
+                aux = next;
+            } 
         }
     }else{
         //si la lista está llena
@@ -68,9 +89,6 @@ function get(list,index){
     if(index > range || index < 0){    
         throw "El indice es incorrecto: debe estar entre el 0 y " + range;
     }
-    if( isNaN(list[index]) ){
-        throw "El el indice está vacío";    
-    }
     return list[index];
 }
 
@@ -82,12 +100,15 @@ function toString(list){
             string = string + list[i] + " - ";
         }
         string = string + list[i];    
+    }else{
+        string = "Lista vacía";
     }
     return string;
 }
 
 //devuelve la primera coincidencia del elemento buscado; si no lo encuentra devuelve -1
 function indexOf(list,elem){
+    
     elem = parseInt(elem);
     var length = size(list)
     var found = -1;
@@ -145,7 +166,7 @@ function lastElement(list){
 
 //elimina el indice del array y devuelve el valor borrado
 function remove(list,index){
-    
+
     if(isEmpty(list)){    
         throw "La lista está vacía";
     }
@@ -199,7 +220,6 @@ function removeElement(list,elem){
     if(!isNaN(list[index - 1]) || index === 0){
         //sustituimos el indice con el nuevo valor
         list[index] = Number.NaN;
-        var aux;
         //desde el siguiente indice al ya sustituido, movemos los elementos
         for(var i = 0; i < range ; i++){
             if(isNaN(list[i])){
@@ -209,7 +229,6 @@ function removeElement(list,elem){
             }
         }   
     }
-
     return deleted;
 }
 
@@ -226,7 +245,6 @@ function addElem(elem,index){
         error.innerHTML = exception;
     }
     info.innerHTML = toString(elemntList); 
-    testList();
 }
 
 // función principal: eliminar un elemento
@@ -236,17 +254,17 @@ function rmvElem(elem,index){
     var info = document.getElementById("info");
     error.innerHTML = ("");
     try {
-        // si se introduce un index de tipo Number
+        // si se introduce un index que NO es de tipo Number
         if(isNaN(index)){
             removeElement(elemntList,elem);    
         }else{
+        // si el index es number
             remove(elemntList,index);
         }
     } catch (exception) {
         error.innerHTML = exception;
     }
     info.innerHTML = toString(elemntList); 
-    
 }
 
 //funciones de testeo
@@ -259,9 +277,10 @@ function testList(){
 
  	try {
 	 	for (var i = 0 ; i < MAX_ELEMENT_LIST ; i++){
-	 		console.log("Nº de elementos: " + add(list,i*10));
+            var num = (Math.floor((Math.random() * 10) + 1));
+            console.log("Nº de elementos: " + add(list,num));
 	 	}
-	 	//add(list,i); //It will generate an exception.
+	 	add(list,i);//excepción al añadir un elemento fuera de rango
  	} catch (err) {
  		console.log(err);
  	}
@@ -269,23 +288,24 @@ function testList(){
  	console.log ("La lista completa: " + toString(list));	 	
  	console.log ("1º elemento: " + firstElement(list));
  	console.log ("último elemento: " + lastElement(list));
-	 	
- 	//clear(list);
 
  	try {
 	 	while (true){ 
 	 		console.log ("Elemento borrado del indice 2: " + remove(list,2));
             console.log ("Estado de la lista actual: " + toString(list)); 
-            console.log ("Eliminamos un valor concreto(si aparece ene el array): 10");  
-            console.log ("Resultado: " + removeElement(list,10));
+            console.log ("Eliminamos un valor concreto(si aparece en el array): 1");  
+            console.log ("Resultado: " + removeElement(list,1));
             console.log ("Estado de la lista actual: " + toString(list));
-            console.log ("añadimos un valor sustituyendo a otro: valor sustituido: " + set(list,25,0));
-            console.log ("Estado de la lista actual: " + toString(list));             	 	 		 	
-	 	}
+            console.log ("Añadimos un elemento. Tamaño actual de la lista: " + add(list,3));
+            console.log ("Estado de la lista actual: " + toString(list));
+            console.log ("Borramos el elemento de un indice concreto, el 0 en este caso: " + remove(list,0));
+            console.log ("Estado de la lista actual: " + toString(list));
+        }
  	} catch (err) {
  		console.log(err); 
     }
-     
- 	console.log ("Estado de la lista actual: " + toString(list)); 	 	
+    console.log ("borramos la lista");
+    clear(list);
+    console.log ("Estado de la lista actual: " + toString(list));  	 	
 }
 window.onload = (testList);

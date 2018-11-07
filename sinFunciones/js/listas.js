@@ -116,6 +116,8 @@ function toString(list){
             string = string + list[i] + " - ";
         }
         string = string + list[i];    
+    }else{
+        string = "Lista vacía";
     }
     return string;
 }
@@ -329,17 +331,18 @@ function rmvElem(elem,index){
 
 //funciones de testeo
 function testList(){
-    var list = create (); 	
+    var list = create(); 	
  	var list=[]; 	
  	console.log ("Capacidad: " + capacity(list));
  	console.log("Es vacía: " + isEmpty(list));
  	console.log("Longitud: " + size(list));
 
  	try {
-	 	for (var i=0; i<MAX_ELEMENT_LIST; i++){
-	 		console.log("Nº de elementos: " + add(list,i*10));
+	 	for (var i = 0 ; i < MAX_ELEMENT_LIST ; i++){
+            var num = (i*10);
+            console.log("Nº de elementos: " + add(list,num));
 	 	}
-	 	add(list,i); //It will generate an exception.
+	 	add(list,i);//excepción al añadir un elemento fuera de rango
  	} catch (err) {
  		console.log(err);
  	}
@@ -347,24 +350,26 @@ function testList(){
  	console.log ("La lista completa: " + toString(list));	 	
  	console.log ("1º elemento: " + firstElement(list));
  	console.log ("último elemento: " + lastElement(list));
-	 	
- 	//clear(list);
 
  	try {
 	 	while (true){ 
-	 		console.log ("Elemento borrado del indice 2: " + remove(list,2));
+	 		console.log ("Elemento borrado del indice 1: " + remove(list,0));
             console.log ("Estado de la lista actual: " + toString(list)); 
-            console.log ("Eliminamos un valor concreto(si aparece ene el array): 10");  
+            console.log ("Eliminamos un valor concreto(si aparece en el array): 10");  
             console.log ("Resultado: " + removeElement(list,10));
             console.log ("Estado de la lista actual: " + toString(list));
-            console.log ("añadimos un valor sustituyendo a otro: valor sustituido: " + set(list,25,0));
-            console.log ("Estado de la lista actual: " + toString(list));             	 	 		 	
-	 	}
+            console.log ("añadimos un valor sustituyendo a otro: valor sustituido: " + set(list,25,2));
+            console.log ("Estado de la lista actual: " + toString(list));
+            console.log ("Añadimos un elemento (35). Tamaño actual de la lista: " + add(list,35));
+            console.log ("Estado de la lista actual: " + toString(list));
+            console.log ("Borramos el elemento de un indice concreto, el 0 en este caso: " + remove(list,0));
+            console.log ("Estado de la lista actual: " + toString(list));
+        }
  	} catch (err) {
  		console.log(err); 
     }
-     
- 	console.log ("Estado de la lista actual: " + toString(list)); 	 	
+    console.log ("borramos la lista");
+    clear(list);
+    console.log ("Estado de la lista actual: " + toString(list));  	 	
 }
 window.onload = (testList);
-
