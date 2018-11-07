@@ -64,7 +64,7 @@ function add(list,elem){
                     index++;
                 }
             }
-            //sustituimos el indice con el nuevo valor
+            //sustituimos el indice con el nuevo valor mayor
             //console.log("el mayor" + index);
             var aux = list[index];
             

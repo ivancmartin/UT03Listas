@@ -50,7 +50,7 @@ function add(list,elem){
         var length = size(list);
         //si está vacía se añade al principio
         if(isEmpty(list)){
-            list[0] = elem;
+            list.unshift(elem);
             //console.log("vacia" + toString(list) );
         }else{
             //buscamos el indice con un valor mayor superior al dado
@@ -65,16 +65,7 @@ function add(list,elem){
                 }
             }
             //sustituimos el indice con el nuevo valor
-            //console.log("el mayor" + index);
-            var aux = list[index];
-            
-            list[index] = elem;
-            //desde el siguiente indice al ya sustituido, movemos los elementos
-            for(var i = (index + 1); i < capacity(list); i++) { //repasar - size
-                var next = list[i];
-                list[i] = aux;
-                aux = next;
-            } 
+            list.splice(index,0,elem);
         }
     }else{
         //si la lista está llena
@@ -85,11 +76,11 @@ function add(list,elem){
 
 // devuelve el elemento encontrado en el indice selecionado dentro del array
 function get(list,index){
-    var range = size(list);
-    if(index > range || index < 0){    
-        throw "El indice es incorrecto: debe estar entre el 0 y " + range;
+    if(list.includes(list[index])){
+        return list[index];
+    }else{
+        throw "El elemento no existe";
     }
-    return list[index];
 }
 
 //devuelve una cadena con la lista en texto formateado
@@ -136,12 +127,8 @@ function capacity(list){
 
 //vacia una lista de elementos: pasa los valores a NaN
 function clear(list){
-    var length = size(list);
-    for (var i = 0; i < length; i++) {
-        list[i] = Number.NaN;
-    }
+    return list.splice(list,size(list));
 }
-
 //devuelve el 1º elemento de un array
 function firstElement(list){
     var last;
@@ -152,7 +139,6 @@ function firstElement(list){
     }
     return last;
 }
-
 //devuelve el último elemento de un array
 function lastElement(list){
     var last;
@@ -163,7 +149,6 @@ function lastElement(list){
     }
     return last;
 }
-
 //elimina el indice del array y devuelve el valor borrado
 function remove(list,index){
 
@@ -176,59 +161,30 @@ function remove(list,index){
     if(index > range || index < 0){    
         throw "El indice es incorrecto: debe estar entre el 0 y " + range;
     }
-
+    //guardamos el elemento que vamos a borrar
     var deleted = list[index];
-    //console.log("indice " + index);
-    list[index] = Number.NaN;
-    //console.log("el siguiente " + (!isNaN(list[index - 1]) || index == 0));
-    
-    if(!isNaN(list[index - 1]) || index == 0){
-        //sustituimos el indice con el nuevo valor
-        list[index] = Number.NaN;
-        var aux;
-        //desde el siguiente indice al ya sustituido, movemos los elementos
-        for(var i = index; i < range ; i++){
-            if(isNaN(list[i])){
-                //console.log(list[i] + " " + list[i + 1] );
-                list[i] = list[i + 1];
-                list[i + 1] = Number.NaN;
-            }
-        }   
-    }
+    //borramos el elemento
+    list.splice(index,1,);
+    //devolvemos el elemento borrado
     return deleted;
 }
-
 //elimina el indice del array
 function removeElement(list,elem){
-    
+    elem = parseInt(elem);
     if(isEmpty(list)){    
         throw "La lista está vacía";
     }
-
-    var range = size(list);
-    
-    //recogemos el indice 
-    var index = indexOf(list,elem); 
-    
-    if(index == -1){
-        throw "Valor no encontrado";
+    console.log("valor del elemento a borrar " + list.includes(elem));
+    if(!list.includes(elem)){
+        throw "el valor no esta en la lista";
     }
-
-    //recogemos el valor que se va a borrar
+    //recogemos el valor del indice de la 1º coincidencia
+    var index = list.indexOf(elem);
+    //guardamos el elemento que vamos a borrar
     var deleted = list[index];
-
-    if(!isNaN(list[index - 1]) || index === 0){
-        //sustituimos el indice con el nuevo valor
-        list[index] = Number.NaN;
-        //desde el siguiente indice al ya sustituido, movemos los elementos
-        for(var i = 0; i < range ; i++){
-            if(isNaN(list[i])){
-                //console.log(list[i] + " " + list[i + 1]);
-                list[i] = list[i + 1];
-                list[i + 1] = Number.NaN;
-            }
-        }   
-    }
+    //borramos el elemento
+    list.splice(index,1,);
+    //devolvemos el elemento borrado
     return deleted;
 }
 
@@ -294,7 +250,7 @@ function testList(){
 	 		console.log ("Elemento borrado del indice 2: " + remove(list,2));
             console.log ("Estado de la lista actual: " + toString(list)); 
             console.log ("Eliminamos un valor concreto(si aparece en el array): 1");  
-            console.log ("Resultado: " + removeElement(list,1));
+            console.log ("Resultado: " + removeElement(list,6));
             console.log ("Estado de la lista actual: " + toString(list));
             console.log ("Añadimos un elemento. Tamaño actual de la lista: " + add(list,3));
             console.log ("Estado de la lista actual: " + toString(list));

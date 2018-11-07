@@ -65,8 +65,11 @@ function addAt(list,elem,index){
 }
 // devuelve el elemento encontrado en el indice selecionado dentro del array
 function get(list,index){
-    
-    return list.indexOf(list)];
+    if(list.includes(list[index])){
+        return list[index];
+    }else{
+        throw "El elemento no existe";
+    }
 }
 //devuelve una cadena con la lista en texto formateado
 function toString(list){
@@ -87,18 +90,27 @@ function capacity(list){
 }
 //vacia una lista de elementos: pasa los valores a NaN
 function clear(list){
-    var length = size(list);
-    for (var i = 0; i < length; i++) {
-        list[i] = Number.NaN;
-    }
+    return list.splice(list,size(list));
 }
 //devuelve el 1º elemento de un array
 function firstElement(list){
-    return list[0];
+    var last;
+    if(!isEmpty(list)){
+        last = list[0];
+    }else{
+        throw "La lista está vacía";
+    }
+    return last;
 }
 //devuelve el último elemento de un array
 function lastElement(list){
-    return list[size(list)-1];
+    var last;
+    if(!isEmpty(list)){
+        last = list[size(list) - 1];
+    }else{
+        throw "La lista está vacía";
+    }
+    return last;
 }
 //elimina el indice del array y devuelve el valor borrado
 function remove(list,index){
@@ -121,9 +133,13 @@ function remove(list,index){
 }
 //elimina el indice del array
 function removeElement(list,elem){
-    
+    elem = parseInt(elem);
     if(isEmpty(list)){    
         throw "La lista está vacía";
+    }
+    console.log("valor del elemento a borrar " + list.includes(elem));
+    if(!list.includes(elem)){
+        throw "el valor no esta en la lista";
     }
     //recogemos el valor del indice de la 1º coincidencia
     var index = list.indexOf(elem);
@@ -171,7 +187,6 @@ function addElem(elem,index){
         error.innerHTML = exception;
     }
     info.innerHTML = toString(elemntList); 
-    testList();
 }
 
 // función principal: eliminar un elemento
@@ -191,7 +206,6 @@ function rmvElem(elem,index){
         error.innerHTML = exception;
     }
     info.innerHTML = toString(elemntList); 
-    
 }
 
 //funciones de testeo
@@ -225,6 +239,7 @@ function testList(){
             console.log ("Estado de la lista actual: " + toString(list));
             console.log ("añadimos un valor sustituyendo a otro: valor sustituido: " + set(list,25,2));
             console.log ("Estado de la lista actual: " + toString(list));
+            console.log ("¿Qué valor hay en el aposición 1? el valor es: " + get(list,1))
             console.log ("Añadimos un elemento (35). Tamaño actual de la lista: " + add(list,35));
             console.log ("Estado de la lista actual: " + toString(list));
             console.log ("Borramos el elemento de un indice concreto, el 0 en este caso: " + remove(list,0));

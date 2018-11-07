@@ -57,7 +57,7 @@ modificaciones sobre el documento lista.html:
     los archivos y documentos no mencionados aparecen vacíos o muy incompletos en esta versión.
 
 #version 0.0.5
-modificaciones sobre los documentos listasOrdenadas.html
+modificaciones sobre los documentos listasOrdenadas.html - funciones
     - funciones principales añadidas para su funcionamiento
 modificaciones sobre los documentos listasOrdenadas.js
     - funciones añadidas:
@@ -79,8 +79,15 @@ modificaciones sobre los documentos listasOrdenadas.js
     - aun en mal funcionamiento.
 
 #version 0.1.0
-modificaciones sobre los documentos listasOrdenadas.js y listas.js
+modificaciones sobre los documentos listasOrdenadas.js y listas.js -con funciones
     - comprobación del estado de las funciones del documento listasOrdenadas.js.
     - corrección de la función toString(ambos): indica si la lista está vacía.
     - corrección de la funcion add (listasOrdenadas.js): obtienen el indice con el valor más alto que elemento dado y lo introduce en esa posición moviendo el resto.
     - corrección de las funciones de testeo de ambos documentos: las funciones son más especificas para cada documento.
+
+#version 0.1.2
+modificaciones sobre los documentos listasOrdenadas.js - con funciones
+    - correción de la función get().
+    - correción de la función clear().
+    - correción de la función removeElement().
+funciones añadidas las funciones de testeo.
