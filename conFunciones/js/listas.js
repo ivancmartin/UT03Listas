@@ -1,52 +1,41 @@
 "use strict";
-
 //máximo de lementos de un array
 var MAX_ELEMENT_LIST = 5;
-
 // array 
 var elemntList = create(); 
-
 // crea un array con un valor máximo
 function create(){
     var list = [];
     return list;
 }
-
 //Comprobar si el array está vacío: devuelve false si NO lo está; true si lo está.
 function isEmpty(list){
     return (size(list) === 0);
 }
-
 //Comprobar si el array está lleno: devuelve false si NO lo está; true si lo está.
 function isFull(list){
     return (size(list) === MAX_ELEMENT_LIST);
 }
-
 //Devuelve el tamaño de un array
 function size(list){
     return list.length;
 }
-
 //añade a la lista un elemento de tipo Number y devuelve el tamaño actual del array
 function add(list,elem){
     var tam = size(list);
     elem = parseInt(elem);
-
     //si el elemento NO es un número
     if(isNaN(elem)){
         throw "Eso no es un número.";
     }
-
     //si la lista está llena
     if(!isFull(list)){
         list.push(elem);
     }else{
         throw "esto está lleno!";
     }
-
     return size(list);
 }
-
 //Añade a la lista un elemento de tipo Number y devuelve el tamaño actual del array
 function addAt(list,elem,index){
     //recogemos el tamaño actual del array
@@ -74,13 +63,11 @@ function addAt(list,elem,index){
     }
     return size(list);
 }
-
 // devuelve el elemento encontrado en el indice selecionado dentro del array
 function get(list,index){
     
-    return list[index];
+    return list.indexOf(list)];
 }
-
 //devuelve una cadena con la lista en texto formateado
 function toString(list){
     var string = "";
@@ -94,24 +81,10 @@ function toString(list){
     }
     return string;
 }
-
-//devuelve la primera coincidencia del elemento buscado; si no lo encuentra devuelve -1
-function indexOf(list,elem){
-    
-    return found;
-}
-
-//devuelve la ultima coincidencia del elemento buscado; si no lo encuentra devuelve -1
-function lastIndexOf(list,elem){
-   
-    return found;
-}
-
 //total de elementos que se pueden introducir en el array
 function capacity(list){
     return MAX_ELEMENT_LIST;
 }
-
 //vacia una lista de elementos: pasa los valores a NaN
 function clear(list){
     var length = size(list);
@@ -119,20 +92,17 @@ function clear(list){
         list[i] = Number.NaN;
     }
 }
-
 //devuelve el 1º elemento de un array
 function firstElement(list){
     return list[0];
 }
-
 //devuelve el último elemento de un array
 function lastElement(list){
     return list[size(list)-1];
 }
-
 //elimina el indice del array y devuelve el valor borrado
 function remove(list,index){
-    
+
     if(isEmpty(list)){    
         throw "La lista está vacía";
     }
@@ -142,37 +112,44 @@ function remove(list,index){
     if(index > range || index < 0){    
         throw "El indice es incorrecto: debe estar entre el 0 y " + range;
     }
-
+    //guardamos el elemento que vamos a borrar
     var deleted = list[index];
-    //console.log("indice " + index);
-    list[index] = Number.NaN;
-    //console.log("el siguiente " + (!isNaN(list[index - 1]) || index == 0));
-    
-    if(!isNaN(list[index - 1]) || index == 0){
-        //sustituimos el indice con el nuevo valor
-        list[index] = Number.NaN;
-        var aux;
-        //desde el siguiente indice al ya sustituido, movemos los elementos
-        for(var i = index; i < range ; i++){
-            if(isNaN(list[i])){
-                //console.log(list[i] + " " + list[i + 1] );
-                list[i] = list[i + 1];
-                list[i + 1] = Number.NaN;
-            }
-        }   
-    }
+    //borramos el elemento
+    list.splice(index,1,);
+    //devolvemos el elemento borrado
     return deleted;
 }
-
 //elimina el indice del array
 function removeElement(list,elem){
     
+    if(isEmpty(list)){    
+        throw "La lista está vacía";
+    }
+    //recogemos el valor del indice de la 1º coincidencia
+    var index = list.indexOf(elem);
+    //guardamos el elemento que vamos a borrar
+    var deleted = list[index];
+    //borramos el elemento
+    list.splice(index,1,);
+    //devolvemos el elemento borrado
     return deleted;
 }
-
-
 //sustituye el valor del indice, devuelve el valor sustituido
 function set(list,elem,index){
+    
+    if(isEmpty(list)){    
+        throw "La lista está vacía";
+    }
+    
+    var range = size(list)-1;
+    
+    if(index > range || index < 0){    
+        throw "El indice es incorrecto: debe estar entre el 0 y " + range;
+    }
+
+    var replace = list[index]
+    
+    list.splice(index,1,elem);
     
     return replace;
 }
