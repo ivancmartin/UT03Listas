@@ -196,12 +196,7 @@ function rmvElem(elem,index){
     var info = document.getElementById("info");
     error.innerHTML = ("");
     try {
-        // si se introduce un index de tipo Number
-        if(isNaN(index)){
-            removeElement(elemntList,elem);    
-        }else{
-            remove(elemntList,index);
-        }
+        remove(elemntList,(size(elemntList)-1));
     } catch (exception) {
         error.innerHTML = exception;
     }

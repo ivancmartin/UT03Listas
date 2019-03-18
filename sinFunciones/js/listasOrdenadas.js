@@ -124,7 +124,8 @@ function indexOf(list,elem){
             }
         }       
     }else{
-        throw "El elemento ha buscar no es un numero entero";
+        found = 0;
+        //throw "El elemento ha buscar no es un numero entero";
     }
     return found;
 }
@@ -211,7 +212,8 @@ function removeElement(list,elem){
     var index = indexOf(list,elem); 
     
     if(index == -1){
-        throw "Valor no encontrado";
+        //throw "Valor no encontrado";
+        index = 0;
     }
 
     //recogemos el valor que se va a borrar

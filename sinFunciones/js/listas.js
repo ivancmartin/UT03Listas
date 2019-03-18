@@ -317,8 +317,9 @@ function rmvElem(elem,index){
     error.innerHTML = ("");
     try {
         // si se introduce un index de tipo Number
+        console.log(index);
         if(isNaN(index)){
-            removeElement(elemntList,elem);    
+            remove(elemntList,0);    
         }else{
             remove(elemntList,index);
         }
@@ -326,7 +327,6 @@ function rmvElem(elem,index){
         error.innerHTML = exception;
     }
     info.innerHTML = toString(elemntList); 
-    
 }
 
 //funciones de testeo

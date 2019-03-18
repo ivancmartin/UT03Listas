@@ -210,18 +210,14 @@ function rmvElem(elem,index){
     var info = document.getElementById("info");
     error.innerHTML = ("");
     try {
-        // si se introduce un index que NO es de tipo Number
-        if(isNaN(index)){
-            removeElement(elemntList,elem);    
-        }else{
-        // si el index es number
-            remove(elemntList,index);
-        }
+        remove(elemntList,(size(elemntList)-1));
     } catch (exception) {
         error.innerHTML = exception;
     }
     info.innerHTML = toString(elemntList); 
 }
+
+
 
 //funciones de testeo
 function testList(){
